@@ -9,3 +9,4 @@ const request = (type, path, body) => axios
 
   export const signIn = body => request('post', '/login', body);
   export const registers = body => request('post', '/register', body);
+  export const profile = body => request('put', '/user', body);
