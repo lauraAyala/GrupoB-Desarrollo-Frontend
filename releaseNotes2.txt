@@ -1,0 +1,30 @@
+---------------------------------------------------------------------
+TAG 1.0
+---------------------------------------------------------------------
+NEW FEATURES (lo que están entregando y está funcionando):
+
+Backend:
+ *Creamos los Controller para:
+   -Donacion: Registra una donacion
+   -Localidad: Registra una localidad,retorna una localidad por id, devuelve tosas las localidades y devuelve el top 10 de donaciones.
+   -Proyecto Registra un proyecto, retorna un proyecto por id,devuelve todos los proyectos y de devuelve el top 10 de localidades.
+   -Usuario: Registra una donacion, retorna un usuario por id, devuelve todos los usuarios, elimina un usuario, un usuario se loguea.
+
+ *Creamos los respectivos repositorios para Donacion,Localidad,Proyecto y Usuario.
+
+ *Creamos los respectivos servicios para la conexion de Donacion,Localidad,Proyecto y Usuario.
+
+
+Frontend:
+* Creamos el Home,el Login,el Profile y el Register.
+
+NOTES (ej: funcionalidad que falta, alguna consideración especial):
+
+*Falta hacer funcionar codacy con coverage
+*Nos falta incluir 18n y swagger.
+*No se nos conecta la base
+
+
+                - 
+
+KNOWN ISSUES () :
