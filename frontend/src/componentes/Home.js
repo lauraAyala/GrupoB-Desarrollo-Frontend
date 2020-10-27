@@ -14,7 +14,7 @@ export default class Home extends Component {
 
     }
     /*componentDidMount() {
-        axios.get(`http://localhost:3000/openProject/${this.props.project.listProjects}`)
+        axios.get(`http://localhost:3001/project/${this.props.project.name}`)
             .then((res => {
                 this.setState({ projects: res.data.projects });
                

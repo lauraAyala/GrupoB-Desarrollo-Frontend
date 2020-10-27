@@ -45,14 +45,13 @@ export default class Login extends Component {
       })
     }   
 
- /*componentDidMount(){
-  axios.get("http://localhost:3000/users")	   
+ componentDidMount(){
+  axios.get("http://localhost:3001/user/users")	   
   .then((res=>{  
           this.setState({users:res.data}); 
       
           }))
  }
-*/
 
   renderInput(label, value, inputType, onChange,placeholder) {
     return (

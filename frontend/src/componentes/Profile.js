@@ -26,19 +26,19 @@ export default class Profile extends Component {
        this.executeProfile = this.executeProfile.bind(this);
      }
 
-   /*  componentDidMount() {
+     componentDidMount() {
       
           
               this.setState({
-                name: this.user.firstName,
-                nickName: this.user.lastName,
+                name: this.user.name,
+                nickName: this.user.nickName,
                 email: this.user.email,
                 caccumulatedPoints: this.user.points,
 
                });
              
           
-    }*/
+    }
   
      changeName(event) {
         this.setState({ name: event.target.value });

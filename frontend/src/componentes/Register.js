@@ -117,7 +117,7 @@ export default class Register extends Component {
                 {this.renderInput('Password', this.state.password, 'password', this.changePassword,"********")}
               
                 <div className="col-12">
-                  <button type="button" className="btn btn-primary btn-block" onClick={this.executeRegister}>Registrar</button>
+                  <button type="button" className="btn btn-primary btn-block" onClick={this.executeRegister}>Register</button>
                 </div> 
                 <div className="col-12 " >
                         {this.state.error && this.state.error}

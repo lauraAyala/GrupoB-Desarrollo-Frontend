@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const server = 'http://localhost:3000';
+const server = 'http://localhost:3001';
 
 const request = (type, path, body) => axios
   .request({ url: `${server}${path}`, method: type, data: body })
