@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {profile} from './api/api';
+import {profile} from './api';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ export default class Profile extends Component {
        this.executeProfile = this.executeProfile.bind(this);
      }
 
-     componentDidMount() {
+   /*  componentDidMount() {
       
           
               this.setState({
@@ -38,7 +38,7 @@ export default class Profile extends Component {
                });
              
           
-    }
+    }*/
   
      changeName(event) {
         this.setState({ name: event.target.value });

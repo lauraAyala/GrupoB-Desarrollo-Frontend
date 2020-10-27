@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {register } from './api';
-//name: String, mail: String, pass: String, admin: Boolean, nick: String
+import {register } from './Api';
 
 export default class Register extends Component {
   constructor(props) {
@@ -105,7 +104,6 @@ export default class Register extends Component {
   render() {
     return (
       <React.Fragment>
-        <div> <NavRegister/>
         <div className="container">
           <div className="row centerRow">
             <div className="col-3" />
@@ -127,7 +125,6 @@ export default class Register extends Component {
               </div>
             </div>
           </div>
-        </div>
         </div>
         {this.renderSuccessModal()}
 
