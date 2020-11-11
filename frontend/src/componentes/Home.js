@@ -13,17 +13,17 @@ export default class Home extends Component {
       
 
     }
-    /*componentDidMount() {
-        axios.get(`http://localhost:3001/project/${this.props.project.name}`)
+    componentDidMount() {
+        axios.get(`http://localhost:3001/project/openProjects/${this.props}`)
             .then((res => {
-                this.setState({ projects: res.data.projects });
+                this.setState({ projects: res.data});
                
             }))
 
 
                     
 
-    };*/
+    };
 
     render() {
         return (

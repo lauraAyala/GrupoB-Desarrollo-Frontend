@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {profile} from './api';
+import {profile} from './Api'
+import NavUser from './Nav/NavUser';
+
 
 export default class Profile extends Component {
     constructor(props) {
@@ -108,6 +110,7 @@ export default class Profile extends Component {
     render() {
       return (
         <React.Fragment>
+          <div> <NavUser user = {this.user} />
         <div className="container">
           <div className="row centerRow">
             <div className="col-3" />
@@ -116,7 +119,7 @@ export default class Profile extends Component {
 
               <div className="card-body"> 
                 {this.renderInput('Name', this.state.name, 'text', this.changeFirstName,"Nombre")}
-                {this.renderInput('Nick Name', this.user.lastName, 'text', () => {})}
+                {this.renderInput('Nick Name', this.user.nickName, 'text', () => {})}
                 {this.renderInput('Email', this.state.email, 'text', this.changeEmail,"Email")}
                  {this.renderInput('Accumulated Points', this.user.accumulatedPoints, 'text',() => {})}
                
@@ -129,6 +132,7 @@ export default class Profile extends Component {
               </div>
             </div>
           </div>
+        </div>
         </div>
         {this.renderSuccessModal()}
         </React.Fragment>

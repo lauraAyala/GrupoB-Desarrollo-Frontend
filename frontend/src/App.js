@@ -10,6 +10,8 @@ import './App.css';
 import Login from './componentes/Login';
 import Home from './componentes/Home';
 import Register from './componentes/Register';
+import Profile from './componentes/Profile';
+
 
 
 
@@ -25,6 +27,8 @@ export default class App extends React.Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={Profile} />
+
 
           </Switch>
         </Route>

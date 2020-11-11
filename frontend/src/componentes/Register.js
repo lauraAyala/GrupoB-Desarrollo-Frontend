@@ -13,7 +13,7 @@ export default class Register extends Component {
        password: '',
        isAdmin:'', 
        nickName: '',
-       error: "",
+       error: '',
        isSuccess: false,
        
        
@@ -23,7 +23,7 @@ export default class Register extends Component {
      this.changeEmail = this.changeEmail.bind(this);
      this.changePassword = this.changePassword.bind(this);
      this.changeIsAdmin = this.changeIsAdmin.bind(this);
-     this.changeNikeName = this.changeNickName.bind(this);
+     this.changeNickName = this.changeNickName.bind(this);
      this.executeRegister = this.executeRegister.bind(this);
    }
 
@@ -40,7 +40,8 @@ export default class Register extends Component {
   }
 
   changeNickName(event) {
-    this.setState({ nickName: event.target.value });
+
+    this.setState({nickName : event.target.value});
   }
   
   changePassword(event) {
@@ -75,7 +76,7 @@ export default class Register extends Component {
 
   }
   executeRegister() {
-    register({email: this.state.email, firstName: this.state.firstName, lastName: this.state.lastName, password: this.state.password, idCard: this.state.idCard })
+    register({name: this.state.name, nickName: this.state.nickName, isAdmin: this.state.isAdmin, password: this.state.password })
     .then((res)=>{
       console.log(res)
       this.setState({ isSuccess: true, successMessage: res.message })
@@ -83,9 +84,8 @@ export default class Register extends Component {
   
     
   }).catch((error) => {
-    console.log(error.response.data.title)
     
-    this.setState({ error: error.response.data.title })
+    this.setState({ error : Error.message })
   })
 
 }   
@@ -112,10 +112,10 @@ export default class Register extends Component {
               <div className="card-body">
                 {this.renderInput('Name', this.state.name, 'text', this.changeName,"Nombre")}
                 {this.renderInput('Email', this.state.email, 'text', this.changeEmail,"x@gmail.com")}
-                {this.renderInput('Nick Name', this.state.NickName, 'text', this.changeNickName,"Apodo")}
-                {this.renderInput('IsAdmin', this.state.isAdmin, 'text', this.changeIsAdmin)}
                 {this.renderInput('Password', this.state.password, 'password', this.changePassword,"********")}
-              
+                {this.renderInput('IsAdmin', this.state.isAdmin, 'text', this.changeIsAdmin)}
+                {this.renderInput('Nick Name',this.state.nickName, 'text', this.changeNickName,"Apodo")}
+
                 <div className="col-12">
                   <button type="button" className="btn btn-primary btn-block" onClick={this.executeRegister}>Register</button>
                 </div> 

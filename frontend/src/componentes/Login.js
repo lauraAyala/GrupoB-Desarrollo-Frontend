@@ -13,7 +13,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       error: '',
-      users: [],
+      user: []
 
 
     };
@@ -39,10 +39,11 @@ export default class Login extends Component {
         const user= this.state.users.find(e=>e.email===this.state.email);   
         this.props.history.push('/home',user);
         
-      }).catch((error) => {
-        this.setState({ error: error.response.data.title })
-        console.log(error.response.data.title);
+      }).catch((Error)=> {
+        this.setState({ error : Error.message});
       })
+        
+      
     }   
 
  componentDidMount(){
