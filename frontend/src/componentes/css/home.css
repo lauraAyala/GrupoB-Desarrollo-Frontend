@@ -1,36 +1,10 @@
-body{
-
-    background-image: url("./imagenFondo.jpeg");
-    width: 100%;
-    text-align: center;
-
-
-}
-
 .Home {
-    background-color: #00ff;
+    background-color: #282c34;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: calc(30px + 4vmin);
-    color: #00ff;
-    background-image: url("./imagenFondo.jpeg");
-    
-
-  
-}
-.texto{
-
-    font-weight:bold;
-    font-size: xx-large;
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    font-family: 'Cabin';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+    font-size: calc(10px + 2vmin);
+    color: rgb(0, 60, 255);
+    background-image: url("./imagenFondo.jpeg")
 }

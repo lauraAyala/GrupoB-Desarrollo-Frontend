@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './css/login.css'
 import { signIn } from './Api';
 import React, { Component } from 'react';
 
@@ -13,7 +14,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       error: '',
-      user: []
+      user: ''
 
 
     };
@@ -35,9 +36,11 @@ export default class Login extends Component {
 
     executeSignIn(){
     signIn({ email: this.state.email, password: this.state.password })
-      .then(() => {
-        const user= this.state.users.find(e=>e.email===this.state.email);   
-        this.props.history.push('/home',user);
+    axios.post("http://localhost:3001/user/login")
+      .then((res) => {
+      
+        //const user= this.state.users.find(e=>e.email===this.state.email);   
+        this.props.history.push('/home',res.data);
         
       }).catch((Error)=> {
         this.setState({ error : Error.message});
@@ -46,13 +49,13 @@ export default class Login extends Component {
       
     }   
 
- componentDidMount(){
+ /*componentDidMount(){
   axios.get("http://localhost:3001/user/users")	   
   .then((res=>{  
           this.setState({users:res.data}); 
       
           }))
- }
+ }*/
 
   renderInput(label, value, inputType, onChange,placeholder) {
     return (

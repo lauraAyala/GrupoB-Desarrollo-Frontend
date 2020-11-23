@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {register } from './Api';
+import axios from 'axios';
+
 
 export default class Register extends Component {
   constructor(props) {
@@ -77,18 +79,18 @@ export default class Register extends Component {
   }
   executeRegister() {
     register({name: this.state.name, nickName: this.state.nickName, isAdmin: this.state.isAdmin, password: this.state.password })
-    .then((res)=>{
-      console.log(res)
-      this.setState({ isSuccess: true, successMessage: res.message })
+    
+    axios.post('http://localhost:3001/user/registerUser')
+    .then((res) => 
+    this.setState({ isSuccess: true, successMessage: res.message }
+    .catch((error) => {
       
-  
-    
-  }).catch((error) => {
-    
-    this.setState({ error : Error.message })
-  })
+      this.setState({ error : Error.message })
+    })));
+                
+   
 
-}   
+}
 
   renderInput(label, value, inputType, onChange,placeholder) {
     return (
