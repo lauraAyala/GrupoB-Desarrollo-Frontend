@@ -35,12 +35,16 @@ export default class Login extends Component {
 
 
     executeSignIn(){
-    signIn({ email: this.state.email, password: this.state.password })
-    axios.post("http://localhost:3001/user/login")
-      .then((res) => {
-      
-        //const user= this.state.users.find(e=>e.email===this.state.email);   
-        this.props.history.push('/home',res.data);
+      signIn({ email: this.state.email, password: this.state.passwor })
+     .then((res) => {
+
+       const userR = {nameUser : res.data.nameUser, 
+                      email: res.data.email,
+                      nickName: res.data.nickName,
+                      point: res.data.points}
+        this.setState({user: userR });
+      //const user= this.state.users.find(e=>e.email===this.state.email);   
+        this.props.history.push('/home',this.state.user);
         
       }).catch((Error)=> {
         this.setState({ error : Error.message});

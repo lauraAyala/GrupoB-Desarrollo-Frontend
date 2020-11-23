@@ -69,7 +69,7 @@ export default class Register extends Component {
               <p>{this.state.successMessage}</p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-primary" onClick={() => this.props.history.push('/')}>Go to page</button>
+              <button type="button" className="btn btn-primary" onClick={() => this.props.history.push('/login')}>Go to page</button>
             </div>
           </div>
         </div>
@@ -80,7 +80,6 @@ export default class Register extends Component {
   executeRegister() {
     register({name: this.state.name, nickName: this.state.nickName, isAdmin: this.state.isAdmin, password: this.state.password })
     
-    axios.post('http://localhost:3001/user/registerUser')
     .then((res) => 
     this.setState({ isSuccess: true, successMessage: res.message }
     .catch((error) => {
