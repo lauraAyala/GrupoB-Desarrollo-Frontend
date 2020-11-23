@@ -7,6 +7,6 @@ const request = (type, path, body) => axios
   .then(req => req.data)
 
 
-  export const signIn = body => request('get', '/login', body);
-  export const register = body => request('post', '/register', body);
-  export const profile = body => request('put', '/user', body);
+  export const signIn = body => request('post', '/user/login', body);
+  export const register = body => request('post', '/user/registerUser', body);
+  export const profile = body => request('put', '/user/user', body);
