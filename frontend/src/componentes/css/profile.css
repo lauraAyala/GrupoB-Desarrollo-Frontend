@@ -1,5 +1,5 @@
-.Home {
-    background-color: #b61c29;
+.Profile {
+    background-color: #282c34;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,4 +7,12 @@
     font-size: calc(10px + 2vmin);
     color: rgb(0, 60, 255);
     background-image: url("./imagenFondo.jpeg")
+}
+
+.MainPageMiddle {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
 }

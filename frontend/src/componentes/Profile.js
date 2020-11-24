@@ -1,142 +1,130 @@
+import axios from 'axios';
 import React, { Component } from 'react';
-import {profile} from './Api'
-import NavUser from './Nav/NavUser';
+import Donor from "./Donor";
+import Table from "react-bootstrap/Table";
+import "./css/profile.css"
 
 
-export default class Profile extends Component {
-    constructor(props) {
-       super(props);
-       this.user = this.props.location.state;
-   
-       this.state = {
-
-        name:'',
-        nickName:'',
-        email: '', 
-        accumulatedPoints: '',
-        error: props.error,
-        isSuccess: false
-
-         
-       };
-  
-       this.successTitle = 'Profile';
-       this.changeName = this.changeName.bind(this);
-       this.changeNickName = this.changeNickName.bind(this);
-       this.changeEmail = this.changeEmail.bind(this);
-       this.changePoints = this.changePoints.bind(this);
-       this.executeProfile = this.executeProfile.bind(this);
-     }
-
-     componentDidMount() {
-      
+class Profile extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          nameUser: '',
+          points: '',
+          donors: [],
+          top10Donations: []
           
-              this.setState({
-                name: this.user.name,
-                nickName: this.user.nickName,
-                email: this.user.email,
-                caccumulatedPoints: this.user.points,
-
-               });
-             
           
-    }
-  
-     changeName(event) {
-        this.setState({ name: event.target.value });
-      }
+      };
+    
 
-      changeNickName(event) {
-        this.setState({ nickName: event.data });
-      }
-
-    changeEmail(event) {
-      this.setState({ email: event.target.value });
-    }
-
-    changePoints(event) {
-        this.setState({ accumulatedPoints: event.data});
-    }
-
-
-    renderSuccessModal() { 
-      return (
-        <div className="modal" tabindex="-1" role="dialog" style={{ display: this.state.isSuccess ? 'block' : '' }}>
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">{this.successTitle}</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => this.setState({ isSuccess: false })}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>{this.state.successMessage}</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-primary" onClick={() => this.props.history.push('/home',this.user)}>Go to page</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        );
-  
-    }
-
-    executeProfile() {
-      profile({ name: this.state.name, nickName: this.state.nickName, email: this.state.email, accumulatedPoints: this.user.points })
-      .then((res)=>{   
-        console.log(res)
-        this.setState({ isSuccess: true, successMessage: res.message })  
-      
-      }).catch((error) => {
-        this.setState({ error: error.response.data.title })
-      })
-
-  
-  }    
-  
-    renderInput(label, value, inputType, onChange,placeholder) {
-      return (
-        <div className="form-group row">
-          <label className="col-sm-3 col-form-label">{label}</label>
-          <div className="col-sm-9">
-          <input placeholder={placeholder || label} type={inputType} className="form-control" value={value} onChange={onChange} />
-          </div>
-        </div>
-      );
-    }
-  
-    render() {
-      return (
-        <React.Fragment>
-          <div> <NavUser user = {this.user} />
-        <div className="container">
-          <div className="row centerRow">
-            <div className="col-3" />
-            <div className="col-6 card newCard">
-            <h1> Profile </h1>
-
-              <div className="card-body"> 
-                {this.renderInput('Name', this.state.name, 'text', this.changeFirstName,"Nombre")}
-                {this.renderInput('Nick Name', this.user.nickName, 'text', () => {})}
-                {this.renderInput('Email', this.state.email, 'text', this.changeEmail,"Email")}
-                 {this.renderInput('Accumulated Points', this.user.accumulatedPoints, 'text',() => {})}
-               
-                <div className="col-12">
-                  <button type="button" className="btn btn-primary btn-block" onClick={this.executeProfile}>Regresar</button>
-                </div>
-                <div className="col-12 " >
-                {this.state.error && this.state.error} 
-              </div> 
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        {this.renderSuccessModal()}
-        </React.Fragment>
-      );
-    }
   }
+  componentDidMount() {
+      axios.get(`http://localhost:3001/user/profile/${this.props.nameUser}`)
+          .then((res => {
+              
+              this.setState({donors: res.data.listDonors});
+                this.setState({user: res.data.nameUser});
+                this.setState({points: res.data.points});
+             
+          }));
+
+      axios.get(`http://localhost:3001/donation/top10donations`)
+       .then((r => {
+
+          this.setState({top10Donations: r.data});
+        }))
+      }
+
   
+ rendenDonors(){
+
+            const {donors} = this.state;
+            if (donors.length === 0) {
+                return <div>Todavia no colabora en ningún proyecto</div>
+            }
+            return (
+                <div className="listDonors">
+                    <Table striped bordered hover variant="dark">
+                        <thead>
+                        <tr>
+                            
+                            <th>{this.state.nameUser}</th>
+                            <th>{this.state.points}</th>
+                            <th>amount</th>
+                            <th>date</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {donors.map(d => <Donor data={d}/>)}
+                        </tbody>
+                    </Table>
+                </div>
+            );
+        }
+rendenTop10Donations(){
+
+          const {top10Donations} = this.state;
+          if (top10Donations.length === 0) {
+              return <div>No existen donaciones a ningún proyecto</div>
+          }
+          return (
+              <div className="listTop10">
+                  <Table striped bordered hover variant="dark">
+                      <thead>
+                      <tr>
+                          
+                          <th>amount</th>
+                          <th>date</th>
+                          
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {top10Donations.map(d => <Donor data={d}/>)}
+                      </tbody>
+                  </Table>
+              </div>
+          );
+}
+    
+        render() { 
+          return (
+
+            <div>
+                 <div className="col-12">
+               
+
+               
+            <div className="container">
+
+            <div className="texto">Donations</div>
+            <div className="conteiner">
+                   
+
+                  {this.state.nameUser}
+                  {this.state.points}
+
+                  {this.rendenDonors()}
+
+
+                </div>
+                </div>
+                </div>
+                <div className="conteiner">
+
+                <div className="texto">Top10Donations</div>
+                <div className="conteiner">
+
+                {this.rendenTop10Donations}
+
+                
+                </div>
+                </div>
+                </div>
+
+                
+        )};
+   }
+
+export default Profile
