@@ -94,7 +94,8 @@ rendenTop10Donations(){
             <div>
                  <div className="col-12">
                
-
+                 {this.state.nameUser}
+                  {this.state.points}
                
             <div className="container">
 
@@ -102,8 +103,7 @@ rendenTop10Donations(){
             <div className="conteiner">
                    
 
-                  {this.state.nameUser}
-                  {this.state.points}
+                  
 
                   {this.rendenDonors()}
 
