@@ -37,38 +37,36 @@ export default class Login extends Component {
 
 
     executeSignIn(){
-      //signIn({ email: this.state.email, password: this.state.passwor })
-      //axios.post(`http://localhost:3001/user/login`)
-      axios({
-        method: 'post',
-        url: 'http://localhost:3001/user/login',
-        data: { email: this.state.email,
-                password:this.state.password }
-    })
-    .then((res) => {
+      const {email,password}= this.state;
+      let params= {email,password}
 
-        //const user = (< User data =  {res.data} />)
-       //this.setState({email: this.state.email, password: this.state.passwor })
-        //this.setState({user: res });
-      //const user= this.state.users.find(e=>e.email===this.state.email);   
-        this.props.history.push('/home');
-        
-      }).catch((Error)=> {
-        this.setState({ error : Error.message});
-      })
-        
-      
-    }   
+      if(this.validarDatos(params)){
+        let endpoint ='http://localhost:3001/user/login';
+        axios.post(endpoint, params)
+                  .then(response => this.props.history.push('/', response.body))
+                  .catch((error) => this.setState({error: error.response.data.title}))
+      }
+    } 
+    
+   handleClick2() {
+    this.props.history.push('/register');
+   }
 
- /*componentDidMount(){
-  axios.get("http://localhost:3001/user/users")	   
-  .then((res=>{  
-          this.setState({users:res.data}); 
-      
-          }))
- }*/
+   isEmpty(value) {
+    return (typeof value === 'undefined' || value === null || value === '');
+    }
 
-  renderInput(label, value, inputType, onChange,placeholder) {
+    validarDatos(params) {
+     if (this.isEmpty(params.email) &&  this.isEmpty(params.password)) {
+      this.setState({error: 'Por favor, complete todos los datos.'});
+      return false
+   }
+     return true;
+   }
+
+     
+
+    renderInput(label, value, inputType, onChange,placeholder) {
     return (
       <div className="form-group row">
         <label className="col-sm-3 col-form-label">{label}</label>
@@ -89,16 +87,13 @@ export default class Login extends Component {
               <div className="row centerRow">
                 <div className="col-3" />
                 <div className="col-6 card newCard">
-        
-
+                <h1> Login</h1>
                   <div className="card-body">
                     {this.renderInput('Email', this.state.username, 'text', this.changeUsername,"x@gmail.com")}
                     {this.renderInput('Password', this.state.password, 'password', this.changePassword,"**********")}
                     <div className="col-12">
                       <button type="button" className="btn btn-primary btn-block" onClick={this.executeSignIn}>Sign In</button>
-                    </div>
-                    <div className="col-12">
-                      <Link to="/register" className="btn btn-link">Sign Up</Link>
+                      <button variant="dark" className={"ml-1rem"} onClick={() =>  this.handleClick2()}>Sign Up</button>
                     </div>
                     <div className="col-12 " >
                       {this.state.error }
