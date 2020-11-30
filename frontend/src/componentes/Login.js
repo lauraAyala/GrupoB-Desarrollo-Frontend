@@ -81,8 +81,8 @@ export default class Login extends Component {
     return (
       <React.Fragment>
       <div>
-
-          <div className="left-colum">
+        
+          <div className="login">
             <div className="container">
               <div className="row centerRow">
                 <div className="col-3" />
@@ -104,7 +104,7 @@ export default class Login extends Component {
             </div>
           </div>
         </div>
-
+        
       
       </React.Fragment>
 

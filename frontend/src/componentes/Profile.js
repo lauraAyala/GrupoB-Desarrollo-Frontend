@@ -92,7 +92,7 @@ rendenTop10Donations(){
           return (
 
             <div>
-                 <div className="col-12">
+                 <div className="Profile">
                
                  {this.state.nameUser}
                   {this.state.points}

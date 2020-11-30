@@ -1,18 +1,10 @@
-.centerRow {
-    padding-top: -1%
-  }
-  
-  .centerLogoRow {
-    padding-top: 10px;;
-  
-  }
-  body {
-    background-color: whitesmoke
-  }
-  .newCard {
-    border: 0ch;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-  .empty {
-    height: 1.5rem;
-  }
+.login{
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  padding: 17px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}

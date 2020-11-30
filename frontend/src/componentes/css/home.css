@@ -6,5 +6,35 @@
     align-items: center;
     font-size: calc(10px + 2vmin);
     color: rgb(0, 60, 255);
-    background-image: url("./imagenFondo.jpeg")
-}
+    background-image: url("./fondo.jpeg")
+ }
+
+ .login-button{
+    background-color: #5d9b9b;
+    color: rgb(12, 11, 11);
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .register-button{
+    background-color: #fcf267;
+    color: rgb(12, 11, 11);
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+  }
+  
+  .profile-button{
+    background-color: #9b5f5d;
+    color: rgb(12, 11, 11);
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+  }

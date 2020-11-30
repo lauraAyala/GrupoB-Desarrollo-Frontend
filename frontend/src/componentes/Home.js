@@ -36,17 +36,10 @@ class Home extends Component {
                 this.setState({ projectsClosed: res.data});
                
             }));
-
-
-                    
-
     };
 
-
-
     rendenProjects(){
-
-        let elements = this.state.projects
+      let elements = this.state.projects
       .slice(this.state.offset, this.state.offset + this.state.perPage)
       .map((project, i) => {
         return (
@@ -62,10 +55,6 @@ class Home extends Component {
       });
     this.setState({ elements: elements });
   }
-
-            
-
-        
 
     renderProjectsCloseToClosing(){
 
@@ -109,16 +98,10 @@ class Home extends Component {
     render() {
 
         return (
-
-    
-  
-            <div className="col-12">
-               
-
-
-            <button type="button" className="btn btn-primary btn-block" onClick={() => this.props.history.push ('/login')}>Login</button>
-             <button type="button" className="btn btn-primary btn-block" onClick={() => this.props.history.push ('/register')}>Register</button>
-             <button type="button" className="btn btn-primary btn-block" onClick={() => this.props.history.push ('/profile')}>Profile</button>
+            <div className="Home">
+            <button type="button" className="login-button" onClick={() => this.props.history.push ('/login')}>Login</button>
+             <button type="button" className="register-button" onClick={() => this.props.history.push ('/register')}>Register</button>
+             <button type="button" className="profile-button" onClick={() => this.props.history.push ('/profile')}>Profile</button>
             
              <div >
 

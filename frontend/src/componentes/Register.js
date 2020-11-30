@@ -115,6 +115,9 @@ export default class Register extends Component {
   render() {
     return (
       <React.Fragment>
+        <div>
+
+        <div className="register">
         <div className="container">
           <div className="row centerRow">
             <div className="col-3" />
@@ -138,6 +141,8 @@ export default class Register extends Component {
               </div>
             </div>
           </div>
+        </div>
+        </div>
         </div>
         {this.renderSuccessModal()}
 
