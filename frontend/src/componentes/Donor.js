@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/register.css'
 
 const Donor = ({data}) => {
     const {amount,date} = data;

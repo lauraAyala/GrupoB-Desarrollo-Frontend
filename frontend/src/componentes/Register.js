@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {register } from './Api';
 import axios from 'axios';
+import './css/register.css'
 
 
 export default class Register extends Component {

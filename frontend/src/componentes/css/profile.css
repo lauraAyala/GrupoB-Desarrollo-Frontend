@@ -6,7 +6,9 @@
     align-items: center;
     font-size: calc(10px + 2vmin);
     color: rgb(0, 60, 255);
-    background-image: url("./imagenFondo.jpeg")
+    background-image: url("./arsat.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .MainPageMiddle {

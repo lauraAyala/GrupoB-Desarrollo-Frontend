@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import {makeDonation } from './Api';
 import axios from 'axios';
+import './css/donation.css';
 
-export default class makeDonations extends Component {
+
+export default class MakeDonation extends Component {
     constructor(props) {
        super(props);
    
@@ -107,7 +110,7 @@ export default class makeDonations extends Component {
           <React.Fragment>
             <div>
     
-            <div className="makeDonation">
+            <div className="donation">
             <div className="container">
               <div className="row centerRow">
                 <div className="col-3" />
@@ -121,7 +124,7 @@ export default class makeDonations extends Component {
     
                     <div className="col-12">
                       <button type="button" className="btn btn-primary btn-block" onClick={this.executeDonation}>Donor</button>
-                      <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancelar</button>
+                      <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancel</button>
                                    
                     </div> 
                     <div className="col-12 " >

@@ -5,6 +5,8 @@ import { signIn } from './Api';
 import User from "./User.js";
 
 import React, { Component } from 'react';
+import Alert from "react-bootstrap/Alert";
+
 
 
 
@@ -95,15 +97,16 @@ export default class Login extends Component {
                       <button type="button" className="btn btn-primary btn-block" onClick={this.executeSignIn}>Sign In</button>
                       <button variant="dark" className={"ml-1rem"} onClick={() =>  this.handleClick2()}>Sign Up</button>
                     </div>
-                    <div className="col-12 " >
-                      {this.state.error }
+                    <div className={"Warning mt-4 col-12"}>
+                            {this.state.error &&
+                            <Alert variant="danger">{this.state.error}</Alert>}
+                        </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         
       
       </React.Fragment>

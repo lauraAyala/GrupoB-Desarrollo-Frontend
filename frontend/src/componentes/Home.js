@@ -102,7 +102,7 @@ class Home extends Component {
             <button type="button" className="login-button" onClick={() => this.props.history.push ('/login')}>Login</button>
              <button type="button" className="register-button" onClick={() => this.props.history.push ('/register')}>Register</button>
              <button type="button" className="profile-button" onClick={() => this.props.history.push ('/profile')}>Profile</button>
-             <button type="button" className="profile-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
+             <button type="button" className="donor-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
 
             
              <div >

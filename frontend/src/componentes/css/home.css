@@ -6,7 +6,9 @@
     align-items: center;
     font-size: calc(10px + 2vmin);
     color: rgb(0, 60, 255);
-    background-image: url("./fondo.jpeg")
+    background-image: url("./fondo.jpeg");
+    background-repeat: no-repeat;
+  background-size: cover;
  }
 
  .login-button{
@@ -20,7 +22,7 @@
   }
 
   .register-button{
-    background-color: #fcf267;
+    background-color: #faea0a;
     color: rgb(12, 11, 11);
     border: none;
     border-radius: 10px;
@@ -30,7 +32,17 @@
   }
   
   .profile-button{
-    background-color: #9b5f5d;
+    background-color: #ff0d05;
+    color: rgb(12, 11, 11);
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .donor-button{
+    background-color: #05ff26;
     color: rgb(12, 11, 11);
     border: none;
     border-radius: 10px;

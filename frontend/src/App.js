@@ -11,10 +11,8 @@ import Login from './componentes/Login';
 import Home from './componentes/Home';
 import Register from './componentes/Register';
 import Profile from './componentes/Profile';
-import Project from './componentes/Project'
-import MakeDonation from './MakeDonation'
-
-
+import Project from './componentes/Project';
+import MakeDonation from './componentes/MakeDonation';
 
 
 
