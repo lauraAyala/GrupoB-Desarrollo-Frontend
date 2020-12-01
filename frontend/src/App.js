@@ -12,6 +12,7 @@ import Home from './componentes/Home';
 import Register from './componentes/Register';
 import Profile from './componentes/Profile';
 import Project from './componentes/Project'
+import MakeDonation from './MakeDonation'
 
 
 
@@ -29,6 +30,8 @@ export default class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/makeDonation" component={MakeDonation} />
+
             <Project></Project>
 
 
