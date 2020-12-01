@@ -1,51 +1,37 @@
 import React, { Component } from 'react';
-import {makeDonation } from './Api';
 import axios from 'axios';
-import './css/donation.css';
+import {finishProject } from './componentes/Api';
 
 
-export default class MakeDonation extends Component {
+export default class ProjectFinish extends Component {
     constructor(props) {
        super(props);
+
    
        this.state = {
-  
-         
-         nameUser: '',
-         nameP:'',
-         amount:'', 
-         date: '',
+         project: '',
+         user:'',
          error: '',
          isSuccess: false,
          
          
        };
-       this.successTitle = 'Make Donation';
-       this.changeNameUser = this.changeNameUser.bind(this);
+       this.successTitle = 'Finish Project';
        this.changeNameProject = this.changeNameProject.bind(this);
-       this.changeAmount = this.changeAmount.bind(this);
-       this.changeDate = this.changeDate.bind(this);
-       this.executeDonation = this.executeDonation.bind(this);
+       this.changeNameUser = this.changeNameUser.bind(this);
+       this.execute = this.execute.bind(this);
      }
 
+
      changeNameUser(event) {
-        this.setState({ nameUser: event.target.value });
+        this.setState({ user: event.target.value });
       }
     
       changeNameProject(event){
-        this.setState({ nameP: event.target.value});
+        this.setState({ project: event.target.value});
       }
     
-      changeAmount(event) {
-        this.setState({ amount: event.target.value });
-      }
-    
-      changeDate(event) {
-    
-        this.setState({date : event.target.value});
-
-      }
-
+      
       
        renderSuccessModal() { 
         return (
@@ -55,9 +41,11 @@ export default class MakeDonation extends Component {
                 <div className="modal-header">
                 </div>
                 <div className="modal-body">
-                  <p>{this.state.successMessage}</p>
+                  <p> project closed</p>
                 </div>
                 <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={() => this.props.history.push('/')}>Go to page</button>
+
                 </div>
               </div>
             </div>
@@ -67,35 +55,32 @@ export default class MakeDonation extends Component {
        }
 
        handleClick2() {
-        this.props.history.push('/');
+        this.props.history.push('/home');
       }
-      executeDonation() {
-
-        axios({
-          method: 'post',
-          url: 'http://localhost:3001/user/registerUser/makeDonation',
-          data: {nameUser: this.state.nameUser, nameP: this.state.nameP,amount: this.state.amount,date: this.state.date }
-        })
-         .then((res) => {
-    
-          this.props.history.push('/') })
-        
-         .catch((error) => this.setState({ error : Error.message}))
-       }
-      
-
       isEmpty(value) {
         return (typeof value === 'undefined' || value === null || value === '');
        }
 
       validarDatos(params) {
-        if (this.isEmpty(params.nameUser) && this.isEmpty(params.nameP) && this.isEmpty(params.amount) && this.isEmpty(params.date)) {
+        if (this.isEmpty(params.user) && this.isEmpty(params.project)) {
             this.setState({error: 'Por favor, complete todos los datos.'});
             return false
         }
         return true;
        }
+      execute() {
+        const {project,user} = this.state;
+        let params = {project,user};
+        if (this.validarDatos(params)) {
 
+          finishProject({project: this.state.project, user: this.state.user})
+         .then((res)=>{
+          console.log(res)
+          this.setState({ isSuccess: true, successMessage: res.message })
+          
+        }).catch((error) => this.setState({error: error.response.data.title}))
+      }
+      }
 
       renderInput(label, value, inputType, onChange,placeholder) {
         return (
@@ -113,21 +98,19 @@ export default class MakeDonation extends Component {
           <React.Fragment>
             <div>
     
-            <div className="donation">
+            <div className="finishProject">
             <div className="container">
               <div className="row centerRow">
                 <div className="col-3" />
                 <div className="col-6 card newCard">
-                  <h1> Make Donation</h1>
+                  <h1>Finish Project</h1>
                   <div className="card-body">
-                    {this.renderInput('Name ', this.state.nameUser, 'text', this.changeNameUser)}
-                    {this.renderInput('Name Project', this.state.nameP, 'text', this.changeNameProject,"Name del Project")}
-                    {this.renderInput('Amount', this.state.amount, 'text', this.changeAmount,"Amount")}
-                    {this.renderInput('Date', this.state.date, 'text', this.changeDate, "Fecha")}
-    
+                    {this.renderInput('Name Project', this.state.project, 'text', this.changeNameProject,"Name del Project")}
+                    {this.renderInput('Name ', this.state.user, 'text', this.changeNameUser,"Name user")}
+
                     <div className="col-12">
-                      <button type="button" className="btn btn-primary btn-block" onClick={this.executeDonation}>Donor</button>
-                      <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancel</button>
+                      <button type="button" className="btn btn-primary btn-block" onClick={this.execute}>finish</button>
+                      <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancelar</button>
                                    
                     </div> 
                     <div className="col-12 " >

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {makeDonation } from './Api';
 import axios from 'axios';
-import './css/donation.css';
 
-
-export default class MakeDonation extends Component {
+export default class makeDonations extends Component {
     constructor(props) {
        super(props);
    
@@ -55,9 +52,11 @@ export default class MakeDonation extends Component {
                 <div className="modal-header">
                 </div>
                 <div className="modal-body">
-                  <p>{this.state.successMessage}</p>
+                  <p> Se realizo donación correctamente</p>
                 </div>
                 <div className="modal-footer">
+
+                <button type="button" className="btn btn-primary" onClick={() => this.props.history.push('/')}>Go to page</button>
                 </div>
               </div>
             </div>
@@ -70,19 +69,19 @@ export default class MakeDonation extends Component {
         this.props.history.push('/');
       }
       executeDonation() {
-
-        axios({
-          method: 'post',
-          url: 'http://localhost:3001/user/registerUser/makeDonation',
-          data: {nameUser: this.state.nameUser, nameP: this.state.nameP,amount: this.state.amount,date: this.state.date }
-        })
-         .then((res) => {
-    
-          this.props.history.push('/') })
-        
-         .catch((error) => this.setState({ error : Error.message}))
+        const {nameUser,nameP,amount,date}= this.state;
+        let params= {nameUser,nameP,amount,date}
+     
+       if(this.validarDatos(params)){
+        let endpoint = 'http://localhost:3001/user/makeDontion';
+        axios.post(endpoint, params)
+         .then((res) => this.setState({ isSuccess: true, successMessage: res })
+          
+          ) .catch((error) => this.setState({error: error.response.data.title}))
        }
-      
+            
+
+      } 
 
       isEmpty(value) {
         return (typeof value === 'undefined' || value === null || value === '');
@@ -113,7 +112,7 @@ export default class MakeDonation extends Component {
           <React.Fragment>
             <div>
     
-            <div className="donation">
+            <div className="makeDonation">
             <div className="container">
               <div className="row centerRow">
                 <div className="col-3" />
@@ -127,7 +126,7 @@ export default class MakeDonation extends Component {
     
                     <div className="col-12">
                       <button type="button" className="btn btn-primary btn-block" onClick={this.executeDonation}>Donor</button>
-                      <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancel</button>
+                      <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancelar</button>
                                    
                     </div> 
                     <div className="col-12 " >

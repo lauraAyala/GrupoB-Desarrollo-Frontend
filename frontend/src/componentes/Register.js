@@ -11,7 +11,7 @@ export default class Register extends Component {
      this.state = {
 
        
-       name:'',
+       nameUser:'',
        email:'',
        password: '',
        isAdmin:'', 
@@ -30,6 +30,10 @@ export default class Register extends Component {
      this.executeRegister = this.executeRegister.bind(this);
    }
 
+   changeName(event) {
+    this.setState({ nameUser: event.target.value });
+  }
+
    changeEmail(event) {
     this.setState({ email: event.target.value });
   }
@@ -38,9 +42,7 @@ export default class Register extends Component {
     this.setState({ isAdmin: event.target.value});
   }
 
-  changeName(event) {
-    this.setState({ name: event.target.value });
-  }
+  
 
   changeNickName(event) {
 
@@ -63,9 +65,11 @@ export default class Register extends Component {
             <div className="modal-header">
             </div>
             <div className="modal-body">
-              <p>{this.state.successMessage}</p>
+            <p>{this.state.message}</p>
             </div>
             <div className="modal-footer">
+
+
             </div>
           </div>
         </div>
@@ -73,17 +77,35 @@ export default class Register extends Component {
       );
 
    }
+
+   
    executeRegister() {
-     const {name,nickName,isAdmin,password}= this.state;
-     let params= {name,nickName,isAdmin,password}
+
+    axios({
+      method: 'post',
+      url: 'http://localhost:3001/user/registerUser',
+      data: {nameUser: this.state.nameUser, email: this.state.email,password: this.state.password,isAdmin: this.state.isAdmin, nickName: this.state.nickName }
+    })
+     .then((res) => {
+
+      this.props.history.push('/', res.data) })
+      //this.setState({ isSuccess: true, successMessage: 'se registro correctamente' })
+
+      //const user = (< User data =  {res.data} />)
+     //this.setState({email: this.state.email, password: this.state.passwor })
+      //this.setState({user: res });
+    //const user= this.state.users.find(e=>e.email===this.state.email);   
+      //this.props.history.push('/home',this.state.user);
+      //this.props.history.push('/home');
+
+    .catch((Error)=> {
+      this.setState({ error : Error.message});
+     //const {name,nickName,isAdmin,password}= this.state;
+     //let params= {name,nickName,isAdmin,password}
+    })
+  }
   
-    if(this.validarDatos(params)){
-      let endpoint ='http://localhost:3001/user/registerUser';
-      axios.post(endpoint, params)
-                .then(response => this.props.history.push('/', response.body))
-                .catch((error) => this.setState({error: error.response.data.title}))
-    }
-   } 
+   
     
 
    handleClick2() {
@@ -125,7 +147,7 @@ export default class Register extends Component {
             <div className="col-6 card newCard">
               <h1> Register </h1>
               <div className="card-body">
-                {this.renderInput('Name', this.state.name, 'text', this.changeName,"Nombre")}
+                {this.renderInput('Name', this.state.nameUser, 'text', this.changeName,"Nombre")}
                 {this.renderInput('Email', this.state.email, 'text', this.changeEmail,"x@gmail.com")}
                 {this.renderInput('Password', this.state.password, 'password', this.changePassword,"********")}
                 {this.renderInput('IsAdmin', this.state.isAdmin, 'text', this.changeIsAdmin)}
