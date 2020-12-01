@@ -4,10 +4,13 @@ import './css/home.css';
 import Project from "./Project";
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
+//import {useTranslation} from 'react-i18next';
 import Image from 'react-bootstrap/Image';
+
 
 class Home extends Component {
     constructor(props) {
+      //const [t,i18n] = useTranslation("global");
         super(props);
         this.state = {
             projects: [],
@@ -20,8 +23,7 @@ class Home extends Component {
             
             
         };
-      
-
+        //const [t,i18n] = withTranslation("global");
     }
     componentDidMount() {
         axios.get(`http://localhost:3001/project/openProjects`)
@@ -103,9 +105,9 @@ class Home extends Component {
              <button type="button" className="register-button" onClick={() => this.props.history.push ('/register')}>Register</button>
              <button type="button" className="profile-button" onClick={() => this.props.history.push ('/profile')}>Profile</button>
              <button type="button" className="donor-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
-
             
-             <div >
+        
+              <div >
 
              {this.state.projects.length > 0 && (
              <div>
@@ -159,4 +161,4 @@ class Home extends Component {
      )};
 
 }
-export default Home
+export default (Home);
