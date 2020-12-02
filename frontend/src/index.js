@@ -3,31 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {reactI18nextModule}from "react-i18next";
-import i18next from "i18next"
 
-import global_es from "./translation/es/global.json"
-import global_en from "./translation/en/global.json"
+import './i18n'
 
-i18next.init({
-  interpolation:{escapeValue:false},
-  lng: "en",
-  resources:{ 
-    es:{
-      global:global_es
-    },
-    en:{
-      global:global_en
-    }
-  }
-});
 
 ReactDOM.render(
   <React.StrictMode>
-    <reactI18nextModule i18n={i18next}>
+  
 
     <App />
-    </reactI18nextModule>
+   
   </React.StrictMode>,
   document.getElementById('root')
 );

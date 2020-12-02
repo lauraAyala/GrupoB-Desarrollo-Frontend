@@ -123,7 +123,7 @@ export default class MakeDonation extends Component {
                     {this.renderInput('Name ', this.state.nameUser, 'text', this.changeNameUser)}
                     {this.renderInput('Name Project', this.state.nameP, 'text', this.changeNameProject,"Name del Project")}
                     {this.renderInput('Amount', this.state.amount, 'text', this.changeAmount,"Amount")}
-                    {this.renderInput('Date', this.state.date, 'text', this.changeDate, "Fecha")}
+                    {this.renderInput('Date', this.state.date, 'text', this.changeDate, "Date")}
     
                     <div className="col-12">
                       <button type="button" className="btn btn-primary btn-block" onClick={this.executeDonation}>Donor</button>

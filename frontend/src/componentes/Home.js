@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './css/home.css';
 import Project from "./Project";
 import Table from "react-bootstrap/Table";
-import ReactPaginate from "react-paginate";
-//import {useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Image from 'react-bootstrap/Image';
+import i18next from 'i18next';
+import i18n from '../i18n';
 
 
 class Home extends Component {
@@ -101,14 +102,17 @@ class Home extends Component {
 
         return (
             <div className="Home">
-            <button type="button" className="login-button" onClick={() => this.props.history.push ('/login')}>Login</button>
-             <button type="button" className="register-button" onClick={() => this.props.history.push ('/register')}>Register</button>
-             <button type="button" className="profile-button" onClick={() => this.props.history.push ('/profile')}>Profile</button>
-             <button type="button" className="donor-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
-            
-        
-              <div >
+           <div class="btn-group" role="group" aria-label="Basic example">
+           <button type="button" className="login-button" onClick={() => this.props.history.push ('/login')}>Login</button>
+           <button type="button" class="register-button" onClick={() => this.props.history.push ('/register')}>Register</button>
+           <button type="button" class="profile-button" onClick={() => this.props.history.push ('/profile')}>Profile</button>
+           <button type="button" class="donor-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
 
+           <button onClick={()=> i18n.changeLanguage("es")}>ES</button>
+           <button onClick={()=> i18n.changeLanguage("en")}>EN</button>
+           </div>
+          <div >
+           
              {this.state.projects.length > 0 && (
              <div>
                  <Table striped bordered hover variant="dark">
@@ -121,43 +125,34 @@ class Home extends Component {
                  </tr>
                  {this.state.elements}
                  </Table>
-                 </div>
-
-)}
-            <button type="button" className="btn btn-primary btn-block" onClick={() => this.handleOnClickButton}>nextLabel</button>
-
-                 <ReactPaginate
-
-                    previousLabel={"← Anterior"}
-                    nextLabel={"Siguiente →"}
-                    breakLabel={<span className="gap">...</span>}
-                    pageCount={this.state.pageCount}
-                    onPageChange={this.handlePageClick}
-                    forcePage={this.state.currentPage}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-link"}
-                    previousClassName={"page-link"}
-                    previousLinkClassName={"page-item"}
-                    nextClassName={"page-link"}
-                    nextLinkClassName={"page-item"}
-                    disabledClassName={"disabled"}
-                    activeClassName={"page-item active"}
-                    activeLinkClassName={"page-link"}
-                    />
-             
-          
-          </div>
-         
-
-             <h1> Projects Close To Closing</h1>
-
-                  {this.renderProjectsCloseToClosing()}
-
-
              </div>
-         
 
-             
+             )}
+           <div>
+               <h1> Projects Close To Closing</h1>
+                   {this.renderProjectsCloseToClosing()}
+            </div>
+          </div>
+
+          <nav aria-label="Page navigation example">
+           <ul class="pagination">
+           <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          </a>
+          </li>
+         <li class="page-item"><a class="page-link" href="#">1</a></li>
+         <li class="page-item"><a class="page-link" href="#">2</a></li>
+         <li class="page-item"><a class="page-link" href="#">3</a></li>
+         <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+         <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+         </ul>
+        </nav>
+       </div>
+
      )};
 
 }
