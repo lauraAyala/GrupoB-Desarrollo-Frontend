@@ -7,14 +7,15 @@ import './css/donation.css';
 export default class MakeDonation extends Component {
     constructor(props) {
        super(props);
+
+       this.user = this.props.location.state;
    
        this.state = {
   
          
-         nameUser: '',
-         nameP:'',
-         amount:'', 
-         date: '',
+         user: '',
+         project:'',
+         donorUser:'', 
          error: '',
          isSuccess: false,
          
@@ -24,29 +25,21 @@ export default class MakeDonation extends Component {
        this.changeNameUser = this.changeNameUser.bind(this);
        this.changeNameProject = this.changeNameProject.bind(this);
        this.changeAmount = this.changeAmount.bind(this);
-       this.changeDate = this.changeDate.bind(this);
        this.executeDonation = this.executeDonation.bind(this);
      }
 
      changeNameUser(event) {
-        this.setState({ nameUser: event.target.value });
+        this.setState({ user: event.target.value });
       }
     
       changeNameProject(event){
-        this.setState({ nameP: event.target.value});
+        this.setState({ project: event.target.value});
       }
     
       changeAmount(event) {
-        this.setState({ amount: event.target.value });
+        this.setState({ donorUser: event.target.value });
       }
-    
-      changeDate(event) {
-    
-        this.setState({date : event.target.value});
-
-      }
-
-      
+     
        renderSuccessModal() { 
         return (
           <div className="modal" tabindex="-1" role="dialog" style={{ display: this.state.isSuccess ? 'block' : '' }}>
@@ -71,14 +64,16 @@ export default class MakeDonation extends Component {
       }
       executeDonation() {
 
+
+
         axios({
           method: 'post',
-          url: 'http://localhost:3001/user/registerUser/makeDonation',
-          data: {nameUser: this.state.nameUser, nameP: this.state.nameP,amount: this.state.amount,date: this.state.date }
+          url: 'http://localhost:3001/user/makeDonation',
+          data: {user: this.state.user, project: this.state.project,donorUser: this.state.donorUser}
         })
          .then((res) => {
     
-          this.props.history.push('/') })
+          this.props.history.push('/profile')})
         
          .catch((error) => this.setState({ error : Error.message}))
        }
@@ -89,7 +84,7 @@ export default class MakeDonation extends Component {
        }
 
       validarDatos(params) {
-        if (this.isEmpty(params.nameUser) && this.isEmpty(params.nameP) && this.isEmpty(params.amount) && this.isEmpty(params.date)) {
+        if (this.isEmpty(params.user) && this.isEmpty(params.project) && this.isEmpty(params.donorUser)) {
             this.setState({error: 'Por favor, complete todos los datos.'});
             return false
         }
@@ -120,10 +115,9 @@ export default class MakeDonation extends Component {
                 <div className="col-6 card newCard">
                   <h1> Make Donation</h1>
                   <div className="card-body">
-                    {this.renderInput('Name ', this.state.nameUser, 'text', this.changeNameUser)}
-                    {this.renderInput('Name Project', this.state.nameP, 'text', this.changeNameProject,"Name del Project")}
-                    {this.renderInput('Amount', this.state.amount, 'text', this.changeAmount,"Amount")}
-                    {this.renderInput('Date', this.state.date, 'text', this.changeDate, "Date")}
+                    {this.renderInput('Name', this.state.user, 'text', this.changeNameUser, "Name")}
+                    {this.renderInput('Name Project', this.state.project, 'text', this.changeNameProject,"Name del Project")}
+                    {this.renderInput('Amount', this.state.donorUser, 'text', this.changeAmount,"Amount")}
     
                     <div className="col-12">
                       <button type="button" className="btn btn-primary btn-block" onClick={this.executeDonation}>Donor</button>

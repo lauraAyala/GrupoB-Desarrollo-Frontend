@@ -13,12 +13,15 @@ class Home extends Component {
     constructor(props) {
       //const [t,i18n] = useTranslation("global");
         super(props);
+
+        this.user = this.props.location.state;
+
         this.state = {
             projects: [],
             projectsClosed: [],
             elements: [],
             offset: 0,
-            perPage: 1,
+            perPage: 2,
             currentPage: 0,
             pageCount: ''
             
@@ -34,11 +37,13 @@ class Home extends Component {
                
             }));
 
-        axios.get(`http://localhost:3001/project/projectsCloseToClosing`)
+            this.setState({user: this.props.location.state })
+
+        /*axios.get(`http://localhost:3001/project/projectsCloseToClosing`)
             .then((res => {
                 this.setState({ projectsClosed: res.data});
                
-            }));
+            }));*/
     };
 
     rendenProjects(){
@@ -105,7 +110,7 @@ class Home extends Component {
            <div class="btn-group" role="group" aria-label="Basic example">
            <button type="button" className="login-button" onClick={() => this.props.history.push ('/login')}>Login</button>
            <button type="button" class="register-button" onClick={() => this.props.history.push ('/register')}>Register</button>
-           <button type="button" class="profile-button" onClick={() => this.props.history.push ('/profile')}>Profile</button>
+           <button type="button" class="profile-button" onClick={() => this.props.history.push ('/profile',this.user)}>Profile</button>
            <button type="button" class="donor-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
 
            <button onClick={()=> i18n.changeLanguage("es")}>ES</button>
@@ -130,7 +135,20 @@ class Home extends Component {
              )}
            <div>
                <h1> Projects Close To Closing</h1>
-                   {this.renderProjectsCloseToClosing()}
+
+               <div>
+                 <Table striped bordered hover variant="dark">
+                 <tr>
+                     <th>ID</th>
+                     <th>Name Project</th>
+                     <th>Location</th>
+                     <th>Init Date</th>
+                     <th>End Date</th>
+                 </tr>
+                 {this.renderProjectsCloseToClosing()}
+
+                 </Table>
+             </div>
             </div>
           </div>
 

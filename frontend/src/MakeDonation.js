@@ -7,7 +7,7 @@ export default class makeDonations extends Component {
    
        this.state = {
   
-         
+         user:'',
          nameUser: '',
          nameP:'',
          amount:'', 
@@ -25,6 +25,11 @@ export default class makeDonations extends Component {
        this.executeDonation = this.executeDonation.bind(this);
      }
 
+     componentDidMount() {
+        
+      this.setState({user: this.props.location.state})
+
+     }
      changeNameUser(event) {
         this.setState({ nameUser: event.target.value });
       }
@@ -75,8 +80,7 @@ export default class makeDonations extends Component {
        if(this.validarDatos(params)){
         let endpoint = 'http://localhost:3001/user/makeDontion';
         axios.post(endpoint, params)
-         .then((res) => this.setState({ isSuccess: true, successMessage: res })
-          
+        .then(response => this.props.history.push('/profile', response.data)          
           ) .catch((error) => this.setState({error: error.response.data.title}))
        }
             

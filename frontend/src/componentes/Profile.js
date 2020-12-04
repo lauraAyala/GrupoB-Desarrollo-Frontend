@@ -20,12 +20,12 @@ class Profile extends Component {
 
   }
   componentDidMount() {
-      axios.get(`http://localhost:3001/user/profile/${this.props.nameUser}`)
+      axios.get(`http://localhost:3001/user/profile/${this.props.location.state.nameUser}`)
           .then((res => {
               
-              this.setState({donors: res.data.listDonors});
-                this.setState({user: res.data.nameUser});
+                this.setState({nameUser: res.data.nameUser});
                 this.setState({points: res.data.points});
+                this.setState({listDonors: res.data.listDonors});
              
           }));
 
@@ -87,17 +87,38 @@ rendenTop10Donations(){
               </div>
           );
 }
+
+renderInput(label, value, inputType, onChange,placeholder) {
+    return (
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">{label}</label>
+        <div className="col-sm-9">
+        <input placeholder={placeholder || label} type={inputType} className="form-control" value={value} onChange={onChange} />
+        </div>
+      </div>
+    );
+  }
     
         render() { 
           return (
 
-            <div>
-                 <div className="Profile">
-               
-                 {this.state.nameUser}
-                  {this.state.points}
-               
+            <div className="profile">
             <div className="container">
+            <div className="row centerRow">
+                <div className="col-3" />
+                <div className="col-6 card newCard">
+                <h1> Profile </h1>
+
+            <div className="card-body"> 
+                {this.renderInput('Name', this.state.nameUser, 'text', () => {})}
+                {this.renderInput('Points', this.state.points, 'text', () => {})}
+
+                <div className="col-12">
+                  <button type="button" className="btn btn-primary btn-block" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
+                  <button variant="dark" className={"ml-1rem"} onClick={() => this.props.history.push('/home')}>Home</button>
+                               
+                </div> 
+
 
             <div className="texto">Donations</div>
             <div className="conteiner">
@@ -119,6 +140,8 @@ rendenTop10Donations(){
                 {this.rendenTop10Donations}
 
                 
+                </div>
+                </div>
                 </div>
                 </div>
                 </div>
