@@ -2,13 +2,13 @@ import React from 'react';
 import './css/register.css'
 
 const Donor = ({data}) => {
-    const {amount,date} = data;
+    const {nameProject,donation,date} = data;
 
     return (
         <tr>
-            <td>{amount}</td>
+            <td>{nameProject}</td>
+            <td>{donation}</td>
             <td>{date}</td>
-            
             
 
         </tr>

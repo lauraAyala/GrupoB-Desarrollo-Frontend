@@ -16,6 +16,8 @@ export default class MakeDonation extends Component {
          user: '',
          project:'',
          donorUser:'', 
+         date: '',
+         file: '',
          error: '',
          isSuccess: false,
          
@@ -26,6 +28,13 @@ export default class MakeDonation extends Component {
        this.changeNameProject = this.changeNameProject.bind(this);
        this.changeAmount = this.changeAmount.bind(this);
        this.executeDonation = this.executeDonation.bind(this);
+     }
+
+     componentDidMount() {
+        
+      this.setState({user: this.props.location.state.nameUser, file: this.props.location.state})
+
+
      }
 
      changeNameUser(event) {
@@ -73,7 +82,8 @@ export default class MakeDonation extends Component {
         })
          .then((res) => {
     
-          this.props.history.push('/profile')})
+         
+          this.props.history.push('/home',this.props.location.state)})
         
          .catch((error) => this.setState({ error : Error.message}))
        }
@@ -115,7 +125,7 @@ export default class MakeDonation extends Component {
                 <div className="col-6 card newCard">
                   <h1> Make Donation</h1>
                   <div className="card-body">
-                    {this.renderInput('Name', this.state.user, 'text', this.changeNameUser, "Name")}
+                    {this.renderInput('Name', this.state.user, 'text', () => {})}
                     {this.renderInput('Name Project', this.state.project, 'text', this.changeNameProject,"Name del Project")}
                     {this.renderInput('Amount', this.state.donorUser, 'text', this.changeAmount,"Amount")}
     

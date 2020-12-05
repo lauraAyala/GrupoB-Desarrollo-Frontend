@@ -20,21 +20,22 @@ class Profile extends Component {
 
   }
   componentDidMount() {
-      axios.get(`http://localhost:3001/user/profile/${this.props.location.state.nameUser}`)
-          .then((res => {
-              
-                this.setState({nameUser: res.data.nameUser});
-                this.setState({points: res.data.points});
-                this.setState({listDonors: res.data.listDonors});
-             
-          }));
+    axios.get(`http://localhost:3001/user/profile/${this.props.location.state.nameUser}`)
+        .then((res => {
+            
+              this.setState({nameUser: res.data.nameUser});
+              this.setState({points: res.data.points});
+             // this.setState({listDonors: res.data.listDonors});
+             //this.setState({user: res.data});
+           
+        }));
 
-      axios.get(`http://localhost:3001/donation/top10donations`)
-       .then((r => {
+    axios.get(`http://localhost:3001/user/donations/${this.props.location.state.nameUser}`)
+     .then((r => {
 
-          this.setState({top10Donations: r.data});
-        }))
-      }
+        this.setState({donors: r.data});
+      }))
+    }
 
   
  rendenDonors(){
@@ -46,24 +47,24 @@ class Profile extends Component {
             return (
                 <div className="listDonors">
                     <Table striped bordered hover variant="dark">
-                        <thead>
-                        <tr>
-                            
-                            <th>{this.state.nameUser}</th>
-                            <th>{this.state.points}</th>
-                            <th>amount</th>
-                            <th>date</th>
+                    {donors.map(d => <Donor data={d}/>)}
+                      
+                      <thead>
+                      <tr>
+                          <th>nameProject</th>
+                          <th>donation</th>
+                          <th>date</th>
                             
                         </tr>
                         </thead>
                         <tbody>
-                        {donors.map(d => <Donor data={d}/>)}
+                       
                         </tbody>
                     </Table>
                 </div>
             );
         }
-rendenTop10Donations(){
+/*rendenTop10Donations(){
 
           const {top10Donations} = this.state;
           if (top10Donations.length === 0) {
@@ -72,12 +73,13 @@ rendenTop10Donations(){
           return (
               <div className="listTop10">
                   <Table striped bordered hover variant="dark">
+                  {donors.map(d => <Donor data={d}/>)}
+                      
                       <thead>
                       <tr>
-                          
-                          <th>amount</th>
+                          <th>nameProject</th>
+                          <th>donation</th>
                           <th>date</th>
-                          
                       </tr>
                       </thead>
                       <tbody>
@@ -86,7 +88,7 @@ rendenTop10Donations(){
                   </Table>
               </div>
           );
-}
+}*/
 
 renderInput(label, value, inputType, onChange,placeholder) {
     return (
@@ -114,8 +116,8 @@ renderInput(label, value, inputType, onChange,placeholder) {
                 {this.renderInput('Points', this.state.points, 'text', () => {})}
 
                 <div className="col-12">
-                  <button type="button" className="style-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
-                  <button variant="dark" className="style-button" onClick={() => this.props.history.push('/home')}>Home</button>
+                  <button type="button" className="style-button" onClick={() => this.props.history.push ('/makeDonation',this.props.location.state)}>Donor</button>
+                  <button variant="dark" className="style-button" onClick={() => this.props.history.push('/home', this.props.location.state)}>Home</button>
                                
                 </div> 
 
@@ -123,24 +125,24 @@ renderInput(label, value, inputType, onChange,placeholder) {
             <div className="texto">Donations</div>
             <div className="conteiner">
                    
+            <div >
+           
+           {this.state.donors.length > 0 && (
 
-                  
+            <div>
+                 {this.rendenDonors()}
 
-                  {this.rendenDonors()}
+           
+           </div>
+
+           )}
 
 
                 </div>
                 </div>
                 </div>
-                <div className="conteiner">
-
-                <div className="texto">Top10Donations</div>
-                <div className="conteiner">
-
-                {this.rendenTop10Donations}
 
                 
-                </div>
                 </div>
                 </div>
                 </div>

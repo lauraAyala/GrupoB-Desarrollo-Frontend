@@ -45,7 +45,7 @@ export default class Login extends Component {
       if(this.validarDatos(params)){
         let endpoint ='http://localhost:3001/user/login';
         axios.post(endpoint, params)
-                  .then(response => this.props.history.push('/profile', response.data))
+                  .then(response => this.props.history.push('/home', response.data))
                   .catch((error) => this.setState({error: error.response.data.title}))
       }
     } 
