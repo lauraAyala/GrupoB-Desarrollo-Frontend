@@ -94,8 +94,8 @@ export default class Login extends Component {
                     {this.renderInput('Email', this.state.username, 'text', this.changeUsername,"x@gmail.com")}
                     {this.renderInput('Password', this.state.password, 'password', this.changePassword,"**********")}
                     <div className="col-12">
-                      <button type="button" className="btn btn-primary btn-block" onClick={this.executeSignIn}>Sign In</button>
-                      <button variant="dark" className={"ml-1rem"} onClick={() =>  this.handleClick2()}>Sign Up</button>
+                      <button type="button" className="style-button:hover" onClick={this.executeSignIn}>Sign In</button>
+                      <button type="button" className="style-button:hover" onClick={() =>  this.handleClick2()}>Sign Up</button>
                     </div>
                     <div className={"Warning mt-4 col-12"}>
                             {this.state.error &&

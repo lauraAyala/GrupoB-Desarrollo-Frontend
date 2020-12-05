@@ -5,46 +5,24 @@
     flex-direction: column;
     align-items: center;
     font-size: calc(10px + 2vmin);
-    color: rgb(0, 60, 255);
-    background-color: whitesmoke;
+    color: rgb(251, 251, 253);
+    background-color: rgb(7, 7, 7);
  }
 
- .login-button{
-    background-color: #020c0cee;
-    color: rgb(251, 253, 253);
-    border: none;
-    border-radius: 10px;
-    width: 100px;
-    height: 25px;
-    font-size: 14px;
-  }
-
-  .register-button{
+  .style-button:hover{
+   
     background-color:#020c0cee;
+    border-color: white;
+    border-bottom-color: white;
     color:  rgb(251, 253, 253);
-    border: none;
-    border-radius: 10px;
+    border: 2px solid #f6f6f8;
+    border-radius: 50px;
     width: 100px;
     height: 25px;
     font-size: 14px;
+    font-weight: 600;
+    background-position: center;
+    
   }
   
-  .profile-button{
-    background-color:#020c0cee;
-    color:  rgb(251, 253, 253);
-    border: none;
-    border-radius: 10px;
-    width: 100px;
-    height: 25px;
-    font-size: 14px;
-  }
-
-  .donor-button{
-    background-color:#020c0cee;
-    color: rgb(251, 253, 253);
-    border: none;
-    border-radius: 10px;
-    width: 100px;
-    height: 25px;
-    font-size: 14px;
-  }
+  
