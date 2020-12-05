@@ -120,8 +120,8 @@ export default class MakeDonation extends Component {
                     {this.renderInput('Amount', this.state.donorUser, 'text', this.changeAmount,"Amount")}
     
                     <div className="col-12">
-                      <button type="button" className="btn btn-primary btn-block" onClick={this.executeDonation}>Donor</button>
-                      <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancel</button>
+                      <button type="button" className="style-button" onClick={this.executeDonation}>Donor</button>
+                      <button type="button" className="style-button" onClick={() => this.handleClick2()}>Cancel</button>
                                    
                     </div> 
                     <div className="col-12 " >

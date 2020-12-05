@@ -14,21 +14,6 @@
  
   }
 
-  .style-button:hover{
-   
-    background-color:#020c0cee;
-    border-color: white;
-    border-bottom-color: white;
-    color:  rgb(251, 253, 253);
-    border: 2px solid #f6f6f8;
-    border-radius: 50px;
-    width: 100px;
-    height: 25px;
-    font-size: 14px;
-    font-weight: 600;
-    background-position: center;
-    
-  }
 
   body{
     background: #050505;

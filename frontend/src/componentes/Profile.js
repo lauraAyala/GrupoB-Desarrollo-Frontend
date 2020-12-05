@@ -114,8 +114,8 @@ renderInput(label, value, inputType, onChange,placeholder) {
                 {this.renderInput('Points', this.state.points, 'text', () => {})}
 
                 <div className="col-12">
-                  <button type="button" className="btn btn-primary btn-block" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
-                  <button variant="dark" className={"ml-1rem"} onClick={() => this.props.history.push('/home')}>Home</button>
+                  <button type="button" className="style-button" onClick={() => this.props.history.push ('/makeDonation')}>Donor</button>
+                  <button variant="dark" className="style-button" onClick={() => this.props.history.push('/home')}>Home</button>
                                
                 </div> 
 

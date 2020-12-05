@@ -154,8 +154,8 @@ export default class Register extends Component {
                 {this.renderInput('Nick Name',this.state.nickName, 'text', this.changeNickName,"NickName")}
                 
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" className="style-button:hover" onClick={this.executeRegister}>Register</button>
-                  <button variant="dark" className={"ml-1rem"} onClick={() => this.handleClick2()}>Cancel</button>
+                  <button type="button" className="style-button" onClick={this.executeRegister}>Register</button>
+                  <button variant="dark" className={"style-button"} onClick={() => this.handleClick2()}>Cancel</button>
                                
                 </div> 
                 <div className="col-12 " >
