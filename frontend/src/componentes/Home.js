@@ -112,7 +112,8 @@ class Home extends Component {
            <button type="button" class="style-button" onClick={() => this.props.history.push ('/register')}>Register</button>
            <button type="button" class="style-button" onClick={() => this.props.history.push ('/profile',this.user)}>Profile</button>
            <button type="button" class="style-button" onClick={() => this.props.history.push ('/makeDonation', this.user)}>Donor</button>
-
+           <button type="button" class="style-button" onClick={() => this.props.history.push ('/finishedProject', this.user)}>FinishProject</button>
+ 
            <button onClick={()=> i18n.changeLanguage("es")}>ES</button>
            <button onClick={()=> i18n.changeLanguage("en")}>EN</button>
            </div>

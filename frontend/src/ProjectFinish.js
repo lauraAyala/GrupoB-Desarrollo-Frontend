@@ -9,8 +9,8 @@ export default class ProjectFinish extends Component {
 
    
        this.state = {
-         project: '',
-         user:'',
+         nameProject: '',
+         nameUser:'',
          error: '',
          isSuccess: false,
          
@@ -22,13 +22,21 @@ export default class ProjectFinish extends Component {
        this.execute = this.execute.bind(this);
      }
 
+     componentDidMount() {
+        
+      this.setState({nameUser: this.props.location.state.nameUser})
+
+
+
+     }
+
 
      changeNameUser(event) {
-        this.setState({ user: event.target.value });
+        this.setState({ nameUser: event.target.value });
       }
     
       changeNameProject(event){
-        this.setState({ project: event.target.value});
+        this.setState({ nameProject: event.target.value});
       }
     
       
@@ -62,25 +70,25 @@ export default class ProjectFinish extends Component {
        }
 
       validarDatos(params) {
-        if (this.isEmpty(params.user) && this.isEmpty(params.project)) {
+        if (this.isEmpty(params.nameUser) && this.isEmpty(params.nameProject)) {
             this.setState({error: 'Por favor, complete todos los datos.'});
             return false
         }
         return true;
        }
       execute() {
-        const {project,user} = this.state;
-        let params = {project,user};
-        if (this.validarDatos(params)) {
-
-          finishProject({project: this.state.project, user: this.state.user})
-         .then((res)=>{
-          console.log(res)
-          this.setState({ isSuccess: true, successMessage: res.message })
-          
-        }).catch((error) => this.setState({error: error.response.data.title}))
-      }
-      }
+        axios({
+          method: 'post',
+          url: 'http://localhost:3001/user/finishedProject',
+          data: {nameProject: this.state.nameProject,nameUser: this.state.nameUser}
+        })
+         .then((res) => {
+    
+         
+          this.props.history.push('/home',this.props.location.state)})
+        
+         .catch((error) => this.setState({ error : Error.message}))
+       }
 
       renderInput(label, value, inputType, onChange,placeholder) {
         return (
@@ -105,8 +113,8 @@ export default class ProjectFinish extends Component {
                 <div className="col-6 card newCard">
                   <h1>Finish Project</h1>
                   <div className="card-body">
-                    {this.renderInput('Name Project', this.state.project, 'text', this.changeNameProject,"Name del Project")}
-                    {this.renderInput('Name ', this.state.user, 'text', this.changeNameUser,"Name user")}
+                    {this.renderInput('Name Project', this.state.nameProject, 'text', this.changeNameProject,"Name del Project")}
+                    {this.renderInput('Name ', this.state.nameUser, 'text', () => {})}
 
                     <div className="col-12">
                       <button type="button" className="btn btn-primary btn-block" onClick={this.execute}>finish</button>

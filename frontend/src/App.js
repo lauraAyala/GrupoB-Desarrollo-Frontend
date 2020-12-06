@@ -13,6 +13,7 @@ import Register from './componentes/Register';
 import Profile from './componentes/Profile';
 import Project from './componentes/Project';
 import MakeDonation from './componentes/MakeDonation';
+import FinisheProject from './ProjectFinish';
 
 
 
@@ -29,6 +30,7 @@ export default class App extends React.Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/makeDonation" component={MakeDonation} />
+            <Route exact path="/finishedProject" component={FinisheProject} />
 
             <Project></Project>
 
