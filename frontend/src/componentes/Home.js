@@ -7,6 +7,9 @@ import {useTranslation} from 'react-i18next';
 import Image from 'react-bootstrap/Image';
 import i18next from 'i18next';
 import i18n from '../i18n';
+import ReactPaginate from 'react-bootstrap/Pagination';
+import Paginacion from './Paginacion';
+import Projects from './Donors';
 
 
 class Home extends Component {
@@ -19,23 +22,24 @@ class Home extends Component {
         this.state = {
             projects: [],
             projectsClosed: [],
-            elements: [],
             offset: 0,
-            perPage: 2,
+            perPage: 1,
             currentPage: 0,
             pageCount: ''
             
             
         };
+        this.handleClick = this.handleClick.bind(this); 
+
         //const [t,i18n] = withTranslation("global");
     }
     componentDidMount() {
         axios.get(`http://localhost:3001/project/openProjects`)
             .then((res => {
-                this.setState({ projects: res.data, pageCount: Math.ceil(this.state.projects.length / this.state.perPage)},
-                 () => this.rendenProjects());
-               
-            }));
+                this.setState({ projects: res.data})}
+                 
+                  ))  
+           
 
             this.setState({user: this.props.location.state })
 
@@ -46,23 +50,59 @@ class Home extends Component {
             }));*/
     };
 
-    rendenProjects(){
+    renderProjects(){
+
+      const {projects} = this.state;
+      if (projects.length === 0) {
+          return <div>No existen Proyectos proximos a cerrarse</div>
+      }
+      return (
+          <div className="projectClose">
+              <Table striped bordered hover variant="dark">
+                  <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Name Project</th>
+                      <th>Location</th>
+                      <th>Init Date</th>
+                      <th>End Date</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {projects.map(p => <Project data={p}/>)}
+                  </tbody>
+              </Table>
+          </div>
+      )
+
+
+    }
+
+    /*
+    rendenProjects( ){
       let elements = this.state.projects
       .slice(this.state.offset, this.state.offset + this.state.perPage)
-      .map((project, i) => {
         return (
-          <tr key={i}>
-            <td>{project.id}</td>
-            <td>{project.nameProject}</td>
-            <td>{project.location}</td>
-            <td>{project.initDate}</td>
-            <td>{project.endDate}</td>
+          <div className="projectClose">
+          <Table striped bordered hover variant="dark">
+              <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Name Project</th>
+                  <th>Location</th>
+                  <th>Init Date</th>
+                  <th>End Date</th>
+              </tr>
+              </thead>
 
-          </tr>
-        );
-      });
-    this.setState({ elements: elements });
-  }
+              <tbody>
+                    {elements.map(p => <Project data={p}/>)}
+               </tbody>
+             
+          </Table>
+      </div>
+        )
+  }*/
 
     renderProjectsCloseToClosing(){
 
@@ -89,22 +129,34 @@ class Home extends Component {
             </div>
         )
     }
-
-    handlePageClick = projects => {
-        const selectedPage = projects.selected;
+    handleClick(event) { 
+      this.setState({ 
+       currentPage: Number(event.target.id) 
+      }); 
+      } 
+    
+     handlePageClick() {
         const offset = selectedPage * this.state.perPage;
-        this.setState({ currentPage: selectedPage, offset: offset }, () => {
+        const selectedPage = offset - this.state.perPage;
+
+        const currentProjects = ({ currentPage: selectedPage, offset: offset }, () => {
+
+          this.setState({elements: currentProjects})
           this.rendenProjects();
         });
       };
+
+    
 
     handleOnClickButton = (goTo) => {
         this.setState({
           currentPage: goTo,
         });}
 
+    
     render() {
 
+     
         return (
             <div className="Home">
            <div class="btn-group" role="group" aria-label="Basic example">
@@ -120,57 +172,28 @@ class Home extends Component {
           <div >
            
              {this.state.projects.length > 0 && (
-             <div>
-                 <Table striped bordered hover variant="dark">
-                 <tr>
-                     <th>ID</th>
-                     <th>Name Project</th>
-                     <th>Location</th>
-                     <th>Init Date</th>
-                     <th>End Date</th>
-                 </tr>
-                 {this.state.elements}
-                 </Table>
-             </div>
 
+              <div>
+              
+              {this.renderProjects()}
+            
+          </div>
              )}
+             
+  
            <div>
                <h1> Projects Close To Closing</h1>
 
-               <div>
-                 <Table striped bordered hover variant="dark">
-                 <tr>
-                     <th>ID</th>
-                     <th>Name Project</th>
-                     <th>Location</th>
-                     <th>Init Date</th>
-                     <th>End Date</th>
-                 </tr>
+              
                  {this.renderProjectsCloseToClosing()}
 
-                 </Table>
              </div>
+
+            
             </div>
           </div>
-
-          <nav aria-label="Page navigation example">
-           <ul class="pagination">
-           <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          </a>
-          </li>
-         <li class="page-item"><a class="page-link" href="#">1</a></li>
-         <li class="page-item"><a class="page-link" href="#">2</a></li>
-         <li class="page-item"><a class="page-link" href="#">3</a></li>
-         <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-         <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-         </ul>
-        </nav>
-       </div>
+                   
+     
 
      )};
 

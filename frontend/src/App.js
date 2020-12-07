@@ -32,12 +32,12 @@ export default class App extends React.Component {
             <Route exact path="/makeDonation" component={MakeDonation} />
             <Route exact path="/finishedProject" component={FinisheProject} />
 
-            <Project></Project>
-
-
-
           </Switch>
         </Route>
+
+
       </BrowserRouter>);
+
+     
   }
 }

@@ -2,7 +2,10 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import Donor from "./Donor";
 import Table from "react-bootstrap/Table";
-import "./css/profile.css"
+import "./css/profile.css";
+import Paginacion from './Paginacion';
+import Donors from './Donors';
+
 
 
 class Profile extends Component {
@@ -12,7 +15,10 @@ class Profile extends Component {
           nameUser: '',
           points: '',
           donors: [],
-          top10Donations: []
+          elements: [],
+          top10Donations: [],
+          perPage: 2,
+
           
           
       };
@@ -37,6 +43,29 @@ class Profile extends Component {
       }))
     }
 
+    renderDonors(){
+
+      let elements = this.state.donors
+      .slice(this.state.offset, this.state.offset + this.state.perPage)
+        return (
+          <div className="projectClose">
+          <Table striped bordered hover variant="dark">
+              <thead>
+              <tr>
+                    <th>nameProject</th>
+                    <th>donation</th>
+                    <th>date</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                    {elements.map(p => <Donor data={p}/>)}
+               </tbody>
+             
+          </Table>
+      </div>
+        )
+    }
   
  rendenDonors(){
 
@@ -102,6 +131,16 @@ renderInput(label, value, inputType, onChange,placeholder) {
   }
     
         render() { 
+
+          const offset = this.state.currentPage * this.state.perPage;
+          const selectedPage = offset - this.state.perPage;
+  
+          const currentDonations = ({ currentPage: selectedPage, offset: offset }, () => {
+            this.setState({elements: currentDonations})
+  
+            this.renderDonors();
+          });
+
           return (
 
             <div className="profile">
@@ -130,10 +169,13 @@ renderInput(label, value, inputType, onChange,placeholder) {
            {this.state.donors.length > 0 && (
 
             <div>
-                 {this.rendenDonors()}
+                 
+                {this.rendenDonors()}
+                 <Paginacion donorsPerPage ={this.state.perPage} totalDonors= {this.state.donors.length} />  
 
            
            </div>
+
 
            )}
 
